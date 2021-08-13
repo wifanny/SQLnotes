@@ -24,23 +24,44 @@ select * from table1 as...
 3. 删除表      DROP table;
 4. 表定义的更新 
 
-   * 增加一列——ADD column
-            ALTER table ADD column name datatype;
-   * 删除一列——DROP column
-            ALTER table DROP column name;
-   * 变更表名——RENAME
-            ALTER table RENAME tablename1 to tablename2;
+   * 增加一列——ADD column——ALTER table ADD column name datatype;
+   * 删除一列——DROP column——ALTER table DROP column name;
+   * 变更表名——RENAME——ALTER table RENAME tablename1 to tablename2;
   
 ## DML数据操纵语言
 1. 向表中插入数据 insert
 2. 连接
    * 自连接 inner join
    * 左连接 left join
-3. 窗口函数：原则上只能写在select子句中，常用于子查询; 有分组排序两个功能
+3. 窗口函数：
+   原则上只能写在select子句中，常用于子查询; 
+   有**分组排序**两个功能; 
+   优先级晚于where, group by,order by;
+   group by分组汇总会改变行数（一行只有一个类别）;
    ```
    select - 
    over (partition by - order by -) as...
    from table
+   ```
+   * 专用窗口函数：区别在于并列时index不同
+   ```
+   rank() over (order by -) as
+   dense_rank() over (order by -) as
+   row_number () over (order by -) as #可用于返回排名
+   ```
+   * 聚合窗口函数：可用于实时查看更新统计值
+   ```
+   #（）内不为空
+   sum (-) over (order by -) as
+   avg(-) count(-) max(-) min(-)
+   ```
+   * 其他窗口函数
+   ```
+   #colume--列名 第一个数字--offset的个数 第二个数字--补充值
+   lag(column,1,0) over (order by -) as  #从上往下移动
+   lead(column,1,0) over (order by -) as #从下往上移动
+   first_values()  取第一行
+   last_values()   取最后一行
    ```
 
 ## Example
