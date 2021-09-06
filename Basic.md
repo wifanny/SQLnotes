@@ -70,6 +70,11 @@ select * from table1 as...
    first_values()  取第一行
    last_values()   取最后一行
    ```
+8. 时间函数
+  ```
+  #用于返回固定格式的日期
+  date_format(trans_date,'%Y-%m')
+  ```
 
 ## Example
 ### ex1 获取第n高的薪水
