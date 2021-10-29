@@ -101,7 +101,7 @@ select Score,
 dense_rank() over (order by Score desc) as 'Rank'
 from Scores
 ```
-* 窗口函数
+* 窗口函数：dense_rank 并列连续排名；rank 并列不连续排名；row_number 连续排名
 
 ### ex3 求连续三次出现的数字的次数
 ```
